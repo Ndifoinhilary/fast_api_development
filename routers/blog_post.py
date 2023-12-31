@@ -16,20 +16,22 @@ def create_blog(blog: BlogModel, id: int, version: int = 1):
     return {"ID": id, "Data": blog, "version": version}
 
 
-@router.post("/new/{id}/comment")
+@router.post("/new/{id}/comment/{coment_id}")
 def create_comment(
     blog: BlogModel,
     id: int,
-    comment_id: int = Query(
+    comment_title: int = Query(
         None, title="Id of the comment", description="some description", deprecated=True
     ),
     content: str = Body(..., max_length=200),
     v: Optional[List[str]] = Query(None),
+    comment_id: int = Path(...),
 ):
     return {
         "blog": blog,
         "id": id,
-        "comment_id": comment_id,
+        "comment_title": comment_title,
         "content": content,
         "v": v,
+        "comment_id": comment_id,
     }
