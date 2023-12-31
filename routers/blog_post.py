@@ -23,5 +23,6 @@ def create_comment(
     comment_id: int = Query(
         None, title="Id of the comment", description="some description", deprecated=True
     ),
+    content: str = Body(..., max_length=200),
 ):
-    return {"blog": blog, "id": id, "comment_id": comment_id}
+    return {"blog": blog, "id": id, "comment_id": comment_id, "content": content}
