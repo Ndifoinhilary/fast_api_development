@@ -1,14 +1,21 @@
 from fastapi import APIRouter, Query, Path, Body
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Dict, Optional, List
 
 router = APIRouter(prefix="/blog/post", tags=["blog"])
+
+
+class Image(BaseModel):
+    url: str
+    alias: str
 
 
 class BlogModel(BaseModel):
     title: str
     content: str
     published: Optional[bool]
+    matedata: Dict[str, str]
+    image: Optional[Image] = None
 
 
 @router.post("/create/{id}")
